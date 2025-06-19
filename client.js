@@ -1,8 +1,11 @@
-const ipc = require('node-ipc').default;
+import ipc from 'node-ipc';
+import { checkAdminPrivileges } from './util.js';
 
 ipc.config.id = 'function-client';
 ipc.config.retry = 1500;
 ipc.config.silent = true;
+
+checkAdminPrivileges();
 
 ipc.connectTo('function-server', () => {
     console.log('已连接到函数服务器');

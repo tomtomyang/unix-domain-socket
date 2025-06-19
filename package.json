@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "is-elevated": "^4.0.0",
     "node-ipc": "^10.1.0"
-  }
-} 
+  },
+  "type": "module"
+}

@@ -1,7 +1,6 @@
-const ipc = require('node-ipc').default;
-const path = require('path');
+import ipc from 'node-ipc';
+import { checkAdminPrivileges } from './util.js';
 
-// 配置 IPC
 ipc.config.id = 'function-server';
 ipc.config.retry = 1500;
 ipc.config.silent = true;
@@ -11,7 +10,6 @@ function a(x, y) {
     return x + y;
 }
 
-// 启动 IPC 服务器
 ipc.serve(() => {
     console.log('函数共享服务器已启动');
 
@@ -43,12 +41,10 @@ ipc.serve(() => {
     });
 });
 
-// 启动服务器
+checkAdminPrivileges();
+
 ipc.server.start();
 
-console.log('Socket 路径:', ipc.server.socketPath);
-
-// 优雅关闭
 process.on('SIGINT', () => {
     ipc.server.stop();
     console.log('服务器已关闭');
